@@ -10,8 +10,14 @@ namespace WhoopieLandMine
     {
 
         public Vector3 whoopiePos;
+        public GameObject parentWhoopieCushion;
 
+        
 
+        private void Start()
+        {
+            parentWhoopieCushion = transform.parent.gameObject;
+        }
         private void Update()
         {
             whoopiePos = transform.position;
@@ -27,6 +33,7 @@ namespace WhoopieLandMine
         {
             Debug.Log("Explode");
             Landmine.SpawnExplosion(whoopiePos, true, 2, 10, 50, 5, null, false);
+            Destroy(parentWhoopieCushion.gameObject);
         }
     }
 }

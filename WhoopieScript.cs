@@ -12,15 +12,27 @@ namespace WhoopieLandMine
         private Vector3 whoopiePos;
         private GameObject parentWhoopieCushion;
         
-        private bool explosionEffect = true;
-        private float killRange = 1f;
-        private float damageRange = 10f;
-        private int nonLethalDamage = 50;
-        private float physicsForce = 5f;
-        private bool goThroughCar = false;
+        private bool explosionEffect;
+        private float killRange;
+        private float damageRange;
+        private int nonLethalDamage;
+        private float physicsForce;
+        private bool goThroughCar;
 
         
+        private void Awake()
+        {
 
+            explosionEffect = WhoopieLandMine.Instance.explosionEffectConfig.Value;
+            goThroughCar = WhoopieLandMine.Instance.goThroughCarConfig.Value;
+
+            killRange = WhoopieLandMine.Instance.killRangeConfig.Value;
+            damageRange = WhoopieLandMine.Instance.damageRangeConfig.Value;
+            physicsForce = WhoopieLandMine.Instance.physicsForceConfig.Value;
+
+            nonLethalDamage = WhoopieLandMine.Instance.nonLethalDamageConfig.Value;
+
+        }
         private void Start()
         {
             parentWhoopieCushion = transform.parent.gameObject;

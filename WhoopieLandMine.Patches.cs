@@ -41,6 +41,30 @@ namespace WhoopieLandMine
 
         }
 
+                [HarmonyPatch(typeof(WhoopieCushionTrigger))]
+        public static class WhoopieCushionTriggerPatch
+        {
+            public static event EventHandler<WhoopieEventArgs> OnWhoopieTrigger;
+
+            [HarmonyPatch("OnTriggerEnter")]
+            [HarmonyPostfix]
+            private static void Postfix(WhoopieCushionTrigger __instance, Collider other)
+            {
+                if (!__instance.itemScript.isHeld && (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy")))
+                {
+                    OnWhoopieTrigger?.Invoke(__instance, new WhoopieEventArgs { collider = other });
+                }
+
+            }
+
+
+        }
+
+        public class WhoopieEventArgs : EventArgs
+        {
+            public Collider collider { get; set; }
+        }
+
 
     }
 }

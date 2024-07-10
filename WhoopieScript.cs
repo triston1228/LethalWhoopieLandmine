@@ -9,8 +9,15 @@ namespace WhoopieLandMine
     internal class WhoopieScript : MonoBehaviour
     {
 
-        public Vector3 whoopiePos;
-        public GameObject parentWhoopieCushion;
+        private Vector3 whoopiePos;
+        private GameObject parentWhoopieCushion;
+        
+        private bool explosionEffect = true;
+        private float killRange = 1f;
+        private float damageRange = 10f;
+        private int nonLethalDamage = 50;
+        private float physicsForce = 5f;
+        private bool goThroughCar = false;
 
         
 
@@ -32,7 +39,7 @@ namespace WhoopieLandMine
         private void WhoopieCushionTriggerPatch_OnWhoopieTrigger(object sender, WhoopieEventArgs e)
         {
             Debug.Log("Explode");
-            Landmine.SpawnExplosion(whoopiePos, true, 2, 10, 50, 5, null, false);
+            Landmine.SpawnExplosion(whoopiePos, explosionEffect, killRange, damageRange, nonLethalDamage, physicsForce, null, goThroughCar);
             Destroy(parentWhoopieCushion.gameObject);
         }
     }
